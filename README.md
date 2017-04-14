@@ -14,5 +14,4 @@ In the Package Manager Console:
 var package = new ExcelPackage();
 var sheet = package.Workbook.Worksheets.Add("Sheet1");
 var modelList = new List<VerticalModel> { new VerticalModel(), new VerticalModel() };
-var expectedDateTime = modelList[0].PropertyDateTime.ToString("{0:f}");
 sheet.ApplyVertical(modelList);

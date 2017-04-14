@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Annotations\CellAttribute.cs" />
     <Compile Include="Annotations\CellShiftAttribute.cs" />
+    <Compile Include="Extensions\ExcelAddressBaseExtension.cs" />
     <Compile Include="Extensions\SheetExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
