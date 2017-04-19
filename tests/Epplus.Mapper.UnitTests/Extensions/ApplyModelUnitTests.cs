@@ -35,7 +35,7 @@ namespace Epplus.Mapper.UnitTests.Extensions
             var sheet = CreateTestingSheet();
 
             // Act
-            sheet.ApplyModel(sheet, 10, model);
+            sheet.ApplyModel(sheet, model, 10);
 
             // Assert
             Assert.That(sheet.Cells[10, 2].Value, Is.EqualTo(model.PropertyString));

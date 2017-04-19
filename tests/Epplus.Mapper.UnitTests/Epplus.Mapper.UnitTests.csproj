@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\AutoMergeRowsHaveSameValueUnitTests.cs" />
-    <Compile Include="Extensions\ApplyHorizontalUnitTests.cs" />
     <Compile Include="Extensions\ApplyModelUnitTests.cs" />
     <Compile Include="Extensions\ApplyVerticalUnitTests.cs" />
     <Compile Include="Extensions\ExcelAddressBaseExtensionUnitTests.cs" />

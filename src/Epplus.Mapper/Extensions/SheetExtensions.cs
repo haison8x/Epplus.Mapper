@@ -25,7 +25,7 @@ namespace Epplus.Mapper.Extensions
             }
         }
 
-        public static void ApplyModel(this ExcelWorksheet sheet, ExcelWorksheet templateSheet, int row, object model)
+        public static void ApplyModel(this ExcelWorksheet sheet, ExcelWorksheet templateSheet, object model, int row)
         {
             var properties = model.GetType().GetProperties();
             foreach (var property in properties)
@@ -42,33 +42,12 @@ namespace Epplus.Mapper.Extensions
             }
         }
 
-        public static void ApplyVertical<T>(this ExcelWorksheet sheet, IEnumerable<T> models)
+        public static void ApplyVertical<T>(this ExcelWorksheet sheet, IEnumerable<T> models, int startRowIndex = 0)
         {
-            var type = typeof(T);
-            var properties = type.GetProperties();
-
-            foreach (var property in properties)
-            {
-                var address = GetExcelCellAddress(property);
-                if (string.IsNullOrEmpty(address))
-                {
-                    continue;
-                }
-
-                var cellAddress = new ExcelCellAddress(address);
-                var rowIndex = 0;
-                foreach (var model in models)
-                {
-                    var value = property.GetValue(model);
-                    var destinationCell = sheet.Cells[cellAddress.Row + rowIndex, cellAddress.Column];
-                    sheet.Cells[address].Copy(destinationCell);
-                    destinationCell.Value = value;
-                    rowIndex++;
-                }
-            }
+            ApplyVertical(sheet, sheet, models, startRowIndex);
         }
 
-        public static void ApplyHorizontal<T>(this ExcelWorksheet sheet, IEnumerable<T> models)
+        public static void ApplyVertical<T>(this ExcelWorksheet sheet, ExcelWorksheet templateSheet, IEnumerable<T> models, int startRowIndex = 0)
         {
             var type = typeof(T);
             var properties = type.GetProperties();
@@ -82,14 +61,14 @@ namespace Epplus.Mapper.Extensions
                 }
 
                 var cellAddress = new ExcelCellAddress(address);
-                var colIndex = 0;
+                var rowIndex = startRowIndex == 0 ? cellAddress.Row : startRowIndex;
                 foreach (var model in models)
                 {
                     var value = property.GetValue(model);
-                    var destinationCell = sheet.Cells[cellAddress.Row, cellAddress.Column + colIndex];
-                    sheet.Cells[address].Copy(destinationCell);
+                    var destinationCell = sheet.Cells[rowIndex, cellAddress.Column];
+                    templateSheet.Cells[address].Copy(destinationCell);
                     destinationCell.Value = value;
-                    colIndex++;
+                    rowIndex++;
                 }
             }
         }
@@ -102,6 +81,13 @@ namespace Epplus.Mapper.Extensions
             return attribute == null
                 ? string.Empty
                 : attribute.Address;
+        }
+
+        public static void AutoMergeRowsHaveSameValue(this ExcelWorksheet sheet, string address)
+        {
+            var excelAddress = new ExcelAddress(address);
+
+            AutoMergeRowsHaveSameValue(sheet, excelAddress);
         }
 
         public static void AutoMergeRowsHaveSameValue(this ExcelWorksheet sheet, ExcelAddress excelAddress)
