@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Epplus.Mapper.Extensions
 {
-    public static class SheetExtensions
+    public static class ExcelWorksheetExtensions
     {
         private static readonly Type CellAttributeType = typeof(CellAttribute);
 
