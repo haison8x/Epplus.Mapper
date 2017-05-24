@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +59,7 @@
     <Compile Include="Extensions\ApplyVerticalUnitTests.cs" />
     <Compile Include="Extensions\ExcelAddressBaseExtensionUnitTests.cs" />
     <Compile Include="Extensions\SheetExtensionsUnitTests.cs" />
+    <Compile Include="Extensions\WorkSheetStyleExtensionUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
