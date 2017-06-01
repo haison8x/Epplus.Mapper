@@ -48,6 +48,7 @@
     <Compile Include="Annotations\CellAttribute.cs" />
     <Compile Include="Annotations\CellShiftAttribute.cs" />
     <Compile Include="Extensions\ExcelAddressBaseExtension.cs" />
+    <Compile Include="Extensions\ExcelPackageExtension.cs" />
     <Compile Include="Extensions\ExcelWorksheetsExtensions.cs" />
     <Compile Include="Extensions\ExcelWorksheetExtensions.cs" />
     <Compile Include="Extensions\WorkSheetStyleExtension.cs" />
