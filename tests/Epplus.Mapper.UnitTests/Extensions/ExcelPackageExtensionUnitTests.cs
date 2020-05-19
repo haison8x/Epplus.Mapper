@@ -1,5 +1,4 @@
 ﻿using Epplus.Mapper.Extensions;
-using NUnit.CompareNetObjects;
 using NUnit.Framework;
 using OfficeOpenXml;
 

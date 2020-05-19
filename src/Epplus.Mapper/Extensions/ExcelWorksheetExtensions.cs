@@ -128,5 +128,72 @@ namespace Epplus.Mapper.Extensions
                 throw new ArgumentOutOfRangeException(nameof(excelAddress), message);
             }
         }
+
+        public static T Read<T>(this ExcelWorksheet sheet, int row = 1)
+        {
+            var methods = typeof(ExcelWorksheet).GetMethods(BindingFlags.Public | BindingFlags.Instance);
+            var getValueMethod = methods.First(m => m.IsGenericMethod && m.Name == "GetValue");
+
+            var type = typeof(T);
+            var model = (T)Activator.CreateInstance(type);
+            var properties = type.GetProperties();
+
+            foreach (var property in properties)
+            {
+                var address = GetExcelCellAddress(property);
+                if (string.IsNullOrEmpty(address))
+                {
+                    continue;
+                }
+
+                var cellAddress = new ExcelCellAddress(address);
+
+                if (property.PropertyType == typeof(bool))
+                {
+                    var cellValue = sheet.GetValue<string>(row, cellAddress.Column);
+
+                    var booleanValue = !string.IsNullOrWhiteSpace(cellValue)
+                        && cellValue != "0"
+                        && !cellValue.Equals("FALSE", StringComparison.CurrentCultureIgnoreCase);
+
+                    property.SetValue(model, booleanValue);
+                    continue;
+                }
+
+                var getValueMethodGeneric = getValueMethod.MakeGenericMethod(property.PropertyType);
+                var excelValue = getValueMethodGeneric.Invoke(sheet, new object[] { row, cellAddress.Column });
+
+                property.SetValue(model, excelValue);
+            }
+
+            return model;
+        }
+
+        public static IEnumerable<T> ReadAll<T>(this ExcelWorksheet sheet, int row = 1)
+        {
+            for (var i = row; i <= sheet.Dimension.End.Row; i++)
+            {
+                if (IsEmptyRow(sheet, i))
+                {
+                    continue;
+                }
+
+                yield return Read<T>(sheet, i);
+            }
+        }
+
+        private static bool IsEmptyRow(this ExcelWorksheet sheet, int row = 1)
+        {
+            for (int col = 1; col <= sheet.Dimension.End.Column; col++)
+            {
+                //check if the cell is empty or not
+                if (sheet.Cells[row, col].Value != null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
