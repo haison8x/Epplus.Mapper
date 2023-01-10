@@ -1,13 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <TargetFramework>netcoreapp3.1</TargetFramework>    
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>net461;net5.0;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Epplus" Version="5.2.0" />
+    <PackageReference Include="Epplus" Version="6.1.1" />
   </ItemGroup>
 
 </Project>
