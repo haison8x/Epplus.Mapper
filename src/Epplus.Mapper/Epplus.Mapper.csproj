@@ -1,11 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;net5.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
+    <IsPackable>true</IsPackable>
+    <Version>7.4.2</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <Title>Epplus.Mapper</Title>
+    <Description>Excel Template with Epplus</Description>
+    <Copyright>haison8x</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Epplus" Version="6.1.1" />
+    <PackageReference Include="Epplus" Version="7.4.2" />
   </ItemGroup>
 
 </Project>
