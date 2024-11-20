@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
     <IsPackable>true</IsPackable>
-    <Version>7.4.2</Version>
+    <Version>7.5.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <Title>Epplus.Mapper</Title>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Epplus" Version="7.4.2" />
+    <PackageReference Include="Epplus" Version="7.5.0" />
   </ItemGroup>
 
 </Project>
